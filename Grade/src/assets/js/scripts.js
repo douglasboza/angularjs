@@ -1,4 +1,4 @@
-// $(document).ready(function(){
+
 		//var semestre_html = $(".box_semestre_repeat")[0].outerHTML;
 	//	for (var i = 0; i < 1; i++) {
 	//		$(".box_semestre_repeat").after(semestre_html );
@@ -60,57 +60,49 @@
 		return componente_encontrado;
 	}
 
-	num_semestre = 1
-	function add_semestre(){
-		// função que adicionar um semestre
-		// ela usa a função de get_list_disciplinas para gerar a lista da lateral de adicionar disciplinas 
-
-
-		var semestre = '	<!-- item semestre --> '+
-    		' <div id="semestre_num_'+num_semestre+'" class="box_semestre box_semestre_repeat"> '+
+	// num_semestre = 1
+	// function add_semestre(){
+		
+	// 	var semestre = '	<!-- item semestre --> '+
+    // 		' <div id="semestre_num_'+num_semestre+'" class="box_semestre box_semestre_repeat"> '+
     		
-    			' <div class="col_semestre1 col_semestre1_repeat"> '+
-    			' 	<p class="num_semestre"><span>'+num_semestre+'°</span> semestre</p> '+
-    		'</div> '+
-     			' <div class="col_semestre2"> '+
- 	    		'	<div  class="aux_add_disciplina item_disc_nova"> '+
- 	    		'		<input type="image" onclick="semestre_selecionado='+num_semestre+';document.getElementById(\'addDisciplinaModal\').style.display=\'block\'" '+
- 	    		'			src="img/add.svg"/>'+
- 	    		' 	</div> '+    		
- 	    		'</div> '+   			
-    		' </div> '+
-    		' <!-- fim item semestre -->';
-	
-    		
-    		
-			
-    		num_semestre = num_semestre+1;
+    // 			' <div class="col_semestre1 col_semestre1_repeat"> '+
+    // 			' 	<p class="num_semestre"><span>'+num_semestre+'°</span> semestre</p> '+
+    // 		'</div> '+
+    //  			' <div class="col_semestre2"> '+
+ 	//     		'	<div  class="aux_add_disciplina item_disc_nova"> '+
+ 	//     		'		<input type="image" onclick="semestre_selecionado='+num_semestre+';document.getElementById(\'addDisciplinaModal\').style.display=\'block\'" '+
+ 	//     		'			src="img/add.svg"/>'+
+ 	//     		' 	</div> '+    		
+ 	//     		'</div> '+   			
+    // 		' </div> '+
+    // 		' <!-- fim item semestre -->';
+    // 		num_semestre = num_semestre+1;
 
-    		$('.div_aux_semestre').before(semestre); // adiciona o html
-	}
+	// 		$('.div_aux_semestre').before(semestre); // adiciona o html
+	// }
 
 
-	function btn_add_disciplina(tipo){
-		// quando clica no botão de adicionar disciplinas, chama a funcao e passa o semestre, tipo e id da disciplinas
+	// function btn_add_disciplina(tipo){
+	// 	// quando clica no botão de adicionar disciplinas, chama a funcao e passa o semestre, tipo e id da disciplinas
 
-		if(tipo == 1){			
-			var id_disciplina = document.formAddDisciplina.select_optativa.options[document.formAddDisciplina.select_optativa.selectedIndex].value;
-		}else{
-			var id_disciplina = document.formAddDisciplina.select_obrigatoria.options[document.formAddDisciplina.select_obrigatoria.selectedIndex].value;
-			
-		}
-		if(id_disciplina == 0)
-			alert("Selecione uma disciplina para adicionar ao semestre!");
-		var componente = get_componente_by_id(id_disciplina);
-		if(disciplina_ja_existe(componente,semestre_selecionado))
-			alert("Disciplina já existe neste período!");
-		else{
-			add_disciplina(componente, semestre_selecionado); // função que adiciona o html da disciplinas
-			semestres_curso[semestre_selecionado-1].push(componente)
-		}
-		document.formAddDisciplina.select_optativa.selectedIndex = 0;
-		document.formAddDisciplina.select_obrigatoria.selectedIndex = 0;
-	}
+	// 	if(tipo == 1){			
+	// 		var id_disciplina = document.formAddDisciplina.select_optativa.options[document.formAddDisciplina.select_optativa.selectedIndex].value;
+	// 	}else{
+	// 		var id_disciplina = document.formAddDisciplina.select_obrigatoria.options[document.formAddDisciplina.select_obrigatoria.selectedIndex].value;
+	// 	}
+	// 	if(id_disciplina == 0)
+	// 		alert("Selecione uma disciplina para adicionar ao semestre!");
+	// 	var componente = get_componente_by_id(id_disciplina);
+	// 	if(disciplina_ja_existe(componente,semestre_selecionado))
+	// 		alert("Disciplina já existe neste período!");
+	// 	else{
+	// 		add_disciplina(componente, semestre_selecionado); // função que adiciona o html da disciplinas
+	// 		semestres_curso[semestre_selecionado-1].push(componente)
+	// 	}
+	// 	document.formAddDisciplina.select_optativa.selectedIndex = 0;
+	// 	document.formAddDisciplina.select_obrigatoria.selectedIndex = 0;
+	// }
 	
 	function disciplina_ja_existe(componente,semestre){
 		var existe = false;
@@ -123,41 +115,41 @@
 		return existe;
 	}
 
-	function add_disciplina(componente,semestre){
+	// function add_disciplina(componente,semestre){
 		
-		// tem que formatar esse html de acordo com o id da disciplina, vai ter o array/json com os dados, tem que ir nesse array e pegar as 
-		// informações da disciplina.
-			if(semestre == null)
-				semestre = componente.semestre_oferta;
-		       var disciplina = ' <!-- item disciplina --> '+
-               '      <div id="dis_id_'+componente.id+'" class="item_disc item_disc_'+get_descricao_modalidade(componente.tipo_vinculo_componente)+'"> '+
-               '          <p class="infs_topo_disc">'+get_descricao_modalidade(componente.tipo_vinculo_componente)+' - <span>'+componente.ch_total+'h</span></p> '+
-               '          <p class="nome_disc">'+componente.codigo+'</p> '+
-		       '          <p class="subs_disc_list">'+componente.nome+'</p> ';
-               if (componente.pre_requisito != null) {
-	               disciplina +='<div class="subs_disc_list"> '+
-	               '               <p>Pré requisitos:</p> '+
-	               '               <span>'+componente.pre_requisito+'</span> '+
-	               '         	</div>';
-           		}
-           		if (componente.co_requisito != null) {
-              		disciplina +='<div class="subs_disc_list"> '+
-               '             <p>Co requisitos:</p> '+
-               '             <span>'+componente.co_requisito+'</span> '+
-               '         </div> ';
-           		}
-           		if (componente.equivalencia != null) {
-               		disciplina +='<div class="subs_disc_list"> '+
-               '             <p>Equivalência:</p> '+
-               '             <span>'+componente.equivalencia+'</span> '+
-               '         </div> ';
-               	}
-               disciplina +='         <p onclick="remove_disciplina('+componente.id+')" class="rem_disciplina">remover</p> '+
-               '      </div> '+
-               '       <!-- fim item disciplina --> ';
+	// 	// tem que formatar esse html de acordo com o id da disciplina, vai ter o array/json com os dados, tem que ir nesse array e pegar as 
+	// 	// informações da disciplina.
+	// 		if(semestre == null)
+	// 			semestre = componente.semestre_oferta;
+	// 	       var disciplina = ' <!-- item disciplina --> '+
+    //            '      <div id="dis_id_'+componente.id+'" class="item_disc item_disc_'+get_descricao_modalidade(componente.tipo_vinculo_componente)+'"> '+
+    //            '          <p class="infs_topo_disc">'+get_descricao_modalidade(componente.tipo_vinculo_componente)+' - <span>'+componente.ch_total+'h</span></p> '+
+    //            '          <p class="nome_disc">'+componente.codigo+'</p> '+
+	// 	       '          <p class="subs_disc_list">'+componente.nome+'</p> ';
+    //            if (componente.pre_requisito != null) {
+	//                disciplina +='<div class="subs_disc_list"> '+
+	//                '               <p>Pré requisitos:</p> '+
+	//                '               <span>'+componente.pre_requisito+'</span> '+
+	//                '         	</div>';
+    //        		}
+    //        		if (componente.co_requisito != null) {
+    //           		disciplina +='<div class="subs_disc_list"> '+
+    //            '             <p>Co requisitos:</p> '+
+    //            '             <span>'+componente.co_requisito+'</span> '+
+    //            '         </div> ';
+    //        		}
+    //        		if (componente.equivalencia != null) {
+    //            		disciplina +='<div class="subs_disc_list"> '+
+    //            '             <p>Equivalência:</p> '+
+    //            '             <span>'+componente.equivalencia+'</span> '+
+    //            '         </div> ';
+    //            	}
+    //            disciplina +='         <p onclick="remove_disciplina('+componente.id+')" class="rem_disciplina">remover</p> '+
+    //            '      </div> '+
+    //            '       <!-- fim item disciplina --> ';
 
-        $("#semestre_num_"+semestre+" .col_semestre1").append(disciplina);
-	}
+    //     $("#semestre_num_"+semestre+" .col_semestre1").append(disciplina);
+	// }
 	
 	function get_descricao_modalidade(tipo_vinculo_componente){
 		
@@ -512,5 +504,6 @@
 		}
 	}
 
-	loadCurriculosComponentes();
-
+	$(document).ready(function(){
+		loadCurriculosComponentes();
+	 });

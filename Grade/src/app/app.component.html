@@ -1,20 +1,126 @@
+<section class="all_content_index" >
+    <div class="box1_index">  
+    
+        <input type="checkbox" value="true" id="check_hide_lat"> 
+        <label for="check_hide_lat" class="label_hide_menu">
+                  <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+        </label>
+  
+        <div class="box1_index_scrool" id="barra_lateral">
 
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+                <div class="inf_var">
+                    <span>Detalhar componentes</span><input type="checkbox" value="true" id="switchExpandir" name="modo_vis"> <br>   
+                    
+                    <span>Período letivo inicial: </span><input type="text" placeholder="Ex: 2017.2"><br>
+                    <span>Prorrogações: </span><input type="text" placeholder="0"><br><br>
+                    <button (click)="add_semestre()" class="add_disc add_semestre add_semestre_desktop">Adicionar Semestre</button>
+                </div>
 
+                <div class="inf_quant">
+                    <p class="inf_p">Total de semestres: <span>2</span> </p>
+                    <p class="inf_p">Disciplinas: <span>12</span> </p>
+                    <p class="inf_p">Média de disciplinas por semestre: <span>12</span> </p>
+                    <p class="inf_p">Atividades complementares: <span>12</span> </p>
+                    <p class="inf_p">Expectativa para conclusão: <span>(Carga horária restante deve ser zero)</span> </p>
+                </div>
+
+                <div class="inf_quant">
+                    <p class="inf_p">Carga horária obrigatória:</p>
+                    <p class="inf_p"><progress max="100" value="80"></progress> <span>1700h/2000h</span> </p>
+                    
+                </div>
+
+                <div class="inf_quant">
+                    <p class="inf_p">Carga horária optativa:</p>
+                      <p class="inf_p"><progress max="100" value="80"></progress> <span>200h/300h</span> </p>
+                </div>
+
+                <div class="inf_quant">
+                    <p class="inf_p">Carga horária total:</p>
+                      <p class="inf_p"><progress max="100" value="80"></progress> <span>1900h/2300h</span> </p>
+                </div>
+        </div>
+  </div>
+
+  <div class="box2_index" id="div_principal">
+    
+    <div id="div_aux_semestre" class="div_aux_semestre"></div>
+    <button class="add_disc add_semestre add_semestre_mobile">Adicionar Semestre</button> 		
+
+    <!-- item complementar -->
+    <div class="box_semestre box_complementares">
+      <div class="col_semestre1_com">
+        <p class="num_semestre">Atividades Complementares</p>
+        <!-- item complementar -->
+        <div class="item_complementar">
+          <p class="tipo_complementar">Participação em palastra</p>
+          <span class="nome_complementar">Evento da GDG Natal 2017</span>
+          <span class="carga_horaria_evento">Carga horária: 4h</span>
+                    <p class="rem_complementar">remover</p>
+        </div>
+        <div class="item_complementar">
+          <p class="tipo_complementar">Participação em palastra</p>
+          <span class="nome_complementar">Evento da GDG Natal 2017</span>
+          <span class="carga_horaria_evento">Carga horária: 4h</span>
+                    <p class="rem_complementar">remover</p>
+        </div>
+        <div class="item_complementar">
+          <p class="tipo_complementar">Participação em palastra</p>
+          <span class="nome_complementar">Evento da GDG Natal 2017</span>
+          <span class="carga_horaria_evento">Carga horária: 4h</span>
+                    <p class="rem_complementar">remover</p>
+        </div>
+        <!-- fim item complementar -->
+      </div>
+      
+      <div class="col_semestre2_com">
+          <input name="" class="hora_complementar" placeholder="Atividade complementar*">
+                  
+          <input name="" class="hora_complementar" placeholder="Carga horária*">
+          <button  class="add_disc add_complementar">Adicionar</button>
+      
+      </div>
+    </div>
+    <!-- fim item complementar -->
+  
+
+    </div>
+
+  </section>
+
+
+  <footer class="item_efeito_scrool_top">
+
+  </footer>
+  
+  <div id="addDisciplinaModal" class="modal">
+    <form onsubmit="return false" class="modal-content animate" name="formAddDisciplina">
+      <p (click)="closeModal()" >fechar</p>
+      <input type="hidden" class="input_num_semestre" name="num_semestre" value="1">
+      <table style="width: 100%">
+        <caption>Adicione uma Disciplina</caption>
+        <tr>
+          <td>Obrigatórias</td>
+          <td>
+            <select #selectobrigatoria class="selec_disc selec_disc_obrigatoria">
+            </select>
+          </td>
+          <td>
+            <input type="image" (click)="closeModal();eventAddDisciplina(1, selectobrigatoria.value)" src="assets/img/add.svg" style="width: 20px" />
+          </td>
+        </tr>
+      
+        <tr>
+          <td>Optativas</td>
+          <td>
+            <select #selectoptativa class="selec_disc selec_disc_optativa">
+            </select>
+          </td>
+          <td>
+            <input type="image" (click)="closeModal();eventAddDisciplina(0, selectoptativa.value)" src="assets/img/add.svg" style="width: 20px" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <!-- <script src="assets/js/scripts.js"></script> -->
