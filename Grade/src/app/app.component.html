@@ -2,18 +2,18 @@
     <div class="box1_index">  
     
         <input type="checkbox" value="true" id="check_hide_lat"> 
-        <label for="check_hide_lat" class="label_hide_menu">
+        <label (click)="eventExpandirLatereal()" for="check_hide_lat" class="label_hide_menu">
                   <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
         </label>
   
         <div class="box1_index_scrool" id="barra_lateral">
 
                 <div class="inf_var">
-                    <span>Detalhar componentes</span><input type="checkbox" value="true" id="switchExpandir" name="modo_vis"> <br>   
+                    <span>Detalhar componentes</span><input (click)="eventDetalharComponente()" type="checkbox" value="true" id="switchExpandir" name="modo_vis"> <br>   
                     
                     <span>Período letivo inicial: </span><input type="text" placeholder="Ex: 2017.2"><br>
                     <span>Prorrogações: </span><input type="text" placeholder="0"><br><br>
-                    <button (click)="add_semestre()" class="add_disc add_semestre add_semestre_desktop">Adicionar Semestre</button>
+                    <button (click)="eventAddSemestre()" class="add_disc add_semestre add_semestre_desktop">Adicionar Semestre</button>
                 </div>
 
                 <div class="inf_quant">
@@ -46,6 +46,7 @@
     
     <div id="div_aux_semestre" class="div_aux_semestre"></div>
     <button class="add_disc add_semestre add_semestre_mobile">Adicionar Semestre</button> 		
+    <input type="hidden" id="semestre_selecionado" value="0" name="semestre_selecionado">
 
     <!-- item complementar -->
     <div class="box_semestre box_complementares">
@@ -102,7 +103,7 @@
         <tr>
           <td>Obrigatórias</td>
           <td>
-            <select #selectobrigatoria class="selec_disc selec_disc_obrigatoria">
+            <select #selectobrigatoria class="selec_disc selec_disc1 selec_disc_obrigatoria">
             </select>
           </td>
           <td>
@@ -113,7 +114,7 @@
         <tr>
           <td>Optativas</td>
           <td>
-            <select #selectoptativa class="selec_disc selec_disc_optativa">
+            <select #selectoptativa class="selec_disc selec_disc0 selec_disc_optativa">
             </select>
           </td>
           <td>
@@ -124,3 +125,33 @@
     </form>
   </div>
   <!-- <script src="assets/js/scripts.js"></script> -->
+
+
+
+
+
+
+<div class="all_disc" style="display:nne" >
+
+      <div *ngFor="let disciplina of lista_html_disc; let i = index" id="dis_id_{{disciplina.id}}" class="item_disc item_disc_Obrigatoria">           
+            <p class="infs_topo_disc">Obrigatoria - <span>{{disciplina.ch_total}}h</span></p>           
+            <p class="nome_disc">{{disciplina.codigo}}</p>           
+            <p class="subs_disc_list">{{disciplina.nome}}</p> 
+            <div class="subs_disc_list">              
+                <p>Equivalência:</p>              
+                <span>{{disciplina.equivalencia}} </span>          
+            </div>     
+            <div class="subs_disc_list">              
+                <p>Co requisitos:</p>              
+                <span>{{disciplina.co_requisito}}</span>          
+            </div>
+            <div class="subs_disc_list">              
+                <p>Pré requisitos:</p>              
+                <span>{{disciplina.pre_requisito}}</span>          
+            </div>
+
+        <p (click)="eventRemoverDisciplina(disciplina.id)" class="rem_disciplina">remover</p>       
+      </div>
+
+        <!-- fim item disciplina --> 
+</div>
