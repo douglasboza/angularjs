@@ -1,3 +1,56 @@
-<p>
-  disciplina works!
-</p>
+
+<div id="addDisciplinaModal" class="modal">
+    <form onsubmit="return false" class="modal-content animate" name="formAddDisciplina">
+      <p (click)="closeModal()" >fechar</p>
+      <input type="hidden" class="input_num_semestre" name="num_semestre" value="1">
+      <table style="width: 100%">
+        <caption>Adicione uma Disciplina</caption>
+        <tr>
+            <td>Obrigatórias</td>
+            <td>
+                <select #selectobrigatoria class="selec_disc selec_disc1 selec_disc_obrigatoria"></select>
+            </td>
+            <td>
+                <input type="image" (click)="closeModal();eventAddDisciplina(1, selectobrigatoria.value)" src="assets/img/add.svg" style="width: 20px" />
+            </td>
+        </tr>
+      
+        <tr>
+          <td>Optativas</td>
+            <td>
+                <select #selectoptativa class="selec_disc selec_disc0 selec_disc_optativa"></select>
+            </td>
+            <td>
+                <input type="image" (click)="closeModal();eventAddDisciplina(0, selectoptativa.value)" src="assets/img/add.svg" style="width: 20px" />
+            </td>
+        </tr>
+      </table>
+    </form>
+</div>
+  
+  
+
+<div class="all_disc" style="display:none" >
+
+    <div *ngFor="let disciplina of lista_html_disc; let i = index" id="dis_id_{{disciplina.id}}" class="item_disc item_disc_Obrigatoria">           
+          <p class="infs_topo_disc">{{ getDescricaoModalidade(disciplina.tipo_vinculo_componente) }} - <span>{{disciplina.ch_total}}h</span></p>           
+          <p class="nome_disc">{{disciplina.codigo}}</p>           
+          <p class="subs_disc_list">{{disciplina.nome}}</p> 
+          <div class="subs_disc_list">              
+              <p>Equivalência:</p>              
+              <span>{{disciplina.equivalencia}} </span>          
+          </div>     
+          <div class="subs_disc_list">              
+              <p>Co requisitos:</p>              
+              <span>{{disciplina.co_requisito}}</span>          
+          </div>
+          <div class="subs_disc_list">              
+              <p>Pré requisitos:</p>              
+              <span>{{disciplina.pre_requisito}}</span>          
+          </div>
+
+      <p (click)="eventRemoverDisciplina(disciplina.id)" class="rem_disciplina">remover</p>       
+    </div>
+
+      <!-- fim item disciplina --> 
+</div>

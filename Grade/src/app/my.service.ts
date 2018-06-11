@@ -12,8 +12,13 @@ export class MyService {
     expandir_inf = true;
     expandir_btn_mobile = true;
     expandir_lateral = true;
-
-    
+    disciplinas=0;
+    media_disciplina_semestre=0;
+    atividades_complementares=0;
+    conclusao=0;
+    carga_horaria_obr=0;
+    carga_horaria_opt=0;
+    carga_horaria_tot=0;
 
     detalharComponente(){
         if(this.expandir_inf){
@@ -29,8 +34,7 @@ export class MyService {
     expandirMenuMobile(){
  		if(this.expandir_btn_mobile){
  			$('.box1_index').css({"max-height":"1500px"});
- 			$('.bars_menu_mobile i').css({"-ms-transform":"rotate(90deg)", "-webkit-transform":"rotate(90deg)", "transform":"rotate(90deg)"});
- 			
+ 			$('.bars_menu_mobile i').css({"-ms-transform":"rotate(90deg)", "-webkit-transform":"rotate(90deg)", "transform":"rotate(90deg)"});		
  		}else{
  			$('.box1_index').css({"max-height":"0px"});
  			$('.bars_menu_mobile i').css({"-ms-transform":"rotate(0deg)", "-webkit-transform":"rotate(0deg)", "transform":"rotate(0deg)"});
@@ -52,11 +56,6 @@ export class MyService {
  		this.expandir_lateral = !this.expandir_lateral;
     } 
 
-
-
-
-	
-
     getSemestre(){
         var semestre = "	<!-- item semestre --> "+
         " <div id='semestre_num_"+this.num_semestre+"' class='box_semestre box_semestre_repeat'> "+    
@@ -74,14 +73,14 @@ export class MyService {
         this.num_semestre = this.num_semestre+1;
         return semestre;
     }
-  
-    moveShowDisciplina(id_disciplina, id_semestre){
-        $("#dis_id_"+id_disciplina).appendTo("#semestre_num_"+id_semestre);
-        $("#dis_id_"+id_disciplina).css({"opacity":"1"}); 
-    }
 
     getSemestreSelecionado(){
         return $("#semestre_selecionado").val();
+    }
+
+    moveShowDisciplina(id_disciplina, id_semestre){
+        $("#dis_id_"+id_disciplina).appendTo("#semestre_num_"+id_semestre);
+        $("#dis_id_"+id_disciplina).css({"opacity":"1"}); 
     }
   
     moveHideDisciplina(id_disciplina){
@@ -89,6 +88,8 @@ export class MyService {
         setTimeout(function() {
             $("#dis_id_"+id_disciplina).appendTo(".all_disc");
         }, 900);
+        this.disciplinas = this.disciplinas+1;
+        // this.carga_horaria_obr = this.carga_horaria_obr + 
     }
 
     closeModal(){
@@ -96,39 +97,6 @@ export class MyService {
         modal.style.display = "none";
     }
 
-    getDisciplina(componente, semestre){
-        // // tem que formatar esse html de acordo com o id da disciplina, vai ter o array/json com os dados, tem que ir nesse array e pegar as 
-        // // informações da disciplina.
-        // 	if(semestre == null)
-        // 		semestre = componente.semestre_oferta;
-        //        var disciplina = ' <!-- item disciplina --> '+
-        //            '      <div id="dis_id_'+componente.id+'" class="item_disc item_disc_'+this.getDescricaoModalidade(componente.tipo_vinculo_componente)+'"> '+
-        //            '          <p class="infs_topo_disc">'+this.getDescricaoModalidade(componente.tipo_vinculo_componente)+' - <span>'+componente.ch_total+'h</span></p> '+
-        //            '          <p class="nome_disc">'+componente.codigo+'</p> '+
-        //        '          <p class="subs_disc_list">'+componente.nome+'</p> ';
-        //            if (componente.pre_requisito != null) {
-        //              disciplina +='<div class="subs_disc_list"> '+
-        //              '               <p>Pré requisitos:</p> '+
-        //              '               <span>'+componente.pre_requisito+'</span> '+
-        //              '         	</div>';
-        //        		}
-        //        		if (componente.co_requisito != null) {
-        //           		disciplina +='<div class="subs_disc_list"> '+
-        //            '             <p>Co requisitos:</p> '+
-        //            '             <span>'+componente.co_requisito+'</span> '+
-        //            '         </div> ';
-        //        		}
-        //        		if (componente.equivalencia != null) {
-        //            		disciplina +='<div class="subs_disc_list"> '+
-        //            '             <p>Equivalência:</p> '+
-        //            '             <span>'+componente.equivalencia+'</span> '+
-        //            '         </div> ';
-        //            	}
-        //            disciplina +='         <p click="removerDisciplina('+componente.id+')" class="rem_disciplina">remover</p> '+
-        //            '      </div> '+
-        //            '       <!-- fim item disciplina --> ';
-        // return disciplina;
-    }
 
     getDescricaoModalidade(tipo_vinculo_componente){
         if(tipo_vinculo_componente == 1)
@@ -149,39 +117,8 @@ export class MyService {
     }
 
     gerarDisciplinas(){
-        // var lista_html_disc = [];
-        // // var componente_encontrado = null;
-        // for (var i = 0; i < this.data.componentes.length; i++) {
-        // 		var componente = this.data.componentes[i];
-        // 	lista_html_disc[i] = this.getDisciplina(componente, 2); 
-        // }
         return this.data.componentes;
     }
-
-    // loadCurriculosComponentes() {
-    // 	var periodo = 0;
-    // 	var semestre = [];
-        
-    //   for (var i = 0; i < data.componentes.length; i++) {
-    //   		var componente = data.componentes[i];
-    //   		if(componente.semestre_oferta != periodo){
-    //   			periodo = componente.semestre_oferta;
-    //   			if(semestre.length > 0)
-    //   				semestres_curso.push(semestre);
-    // 			semestre = new Array();
-    //   			if(componente.semestre_oferta != 0)
-    //   				add_semestre();
-    //   		}
-        // 		add_disciplina(componente);
-        // 		semestre.push(componente);
-        
-    //   }
-    //   semestres_curso.push(semestre);
-    //   carregar_lista_disciplinas();
-        
-        
-    // }
-
 
     getListaDisciplinas(tipo){ 
         var list_disc = "";
