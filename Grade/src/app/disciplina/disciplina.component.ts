@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyService } from '../my.service';
+import { MenuComponent } from '../menu/menu.component';
 
 declare var $: any;
 
@@ -11,8 +12,9 @@ declare var $: any;
 export class DisciplinaComponent implements OnInit {
   lista_html_disc;
   semestre_selecionado;
+  // num_disciplinas=0;
 
-  constructor(public service: MyService) {
+  constructor(public service: MyService, public menucomponent:MenuComponent) {
     this.listaDisciplinas(1);
     this.listaDisciplinas(0);
     this.gerarDisciplinas();
@@ -29,16 +31,8 @@ export class DisciplinaComponent implements OnInit {
       if((id_disciplina == null) || (id_disciplina == 0)){
         alert("Selecione uma disciplina para adicionar ao semestre!");
       }
-      // var componente = this.service.getComponentById(id_disciplina);
-      // if(disciplina_ja_existe(componente, semestre_selecionado))
-        // alert("Disciplina já existe neste período!");
-      // else
-
       this.service.moveShowDisciplina(id_disciplina, this.semestre_selecionado);
-        // this.semestres_curso[this.semestre_selecionado-1].push(componente)
-      // }
-      // document.formAddDisciplina.select_optativa.selectedIndex = 0;
-      // document.formAddDisciplina.select_obrigatoria.selectedIndex = 0;
+      this.menucomponent.updateInfs();
   }
 
   listaDisciplinas(tipo){ // gera a lista das disciplinas para o select

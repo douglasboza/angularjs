@@ -8,7 +8,7 @@ declare var $: any;
 export class MyService {
     constructor() {}
   
-    num_semestre = 1;
+    num_semestres = 0;
     expandir_inf = true;
     expandir_btn_mobile = true;
     expandir_lateral = true;
@@ -19,6 +19,14 @@ export class MyService {
     carga_horaria_obr=0;
     carga_horaria_opt=0;
     carga_horaria_tot=0;
+
+    getNumSemestres(){
+        return this.num_semestres;
+    }
+    getNumDisciplinas(){
+        return this.disciplinas;
+    }
+    
 
     detalharComponente(){
         if(this.expandir_inf){
@@ -57,20 +65,20 @@ export class MyService {
     } 
 
     getSemestre(){
+        this.num_semestres = this.num_semestres+1;
         var semestre = "	<!-- item semestre --> "+
-        " <div id='semestre_num_"+this.num_semestre+"' class='box_semestre box_semestre_repeat'> "+    
+        " <div id='semestre_num_"+this.num_semestres+"' class='box_semestre box_semestre_repeat'> "+    
         " <div class='col_semestre1 col_semestre1_repeat'> "+
-        " 	<p class='num_semestre'><span>"+this.num_semestre+"°</span> semestre</p> "+
+        " 	<p class='num_semestre'><span>"+this.num_semestres+"°</span> semestre</p> "+
         "</div> "+
         " <div class='col_semestre2'> "+
         "	<div  class='aux_add_disciplina item_disc_nova'> "+
-        "		<input type='image' onclick='document.getElementById(\"semestre_selecionado\").value="+this.num_semestre+";document.getElementById(\"addDisciplinaModal\").style.display=\"block\"' "+
+        "		<input type='image' onclick='document.getElementById(\"semestre_selecionado\").value="+this.num_semestres+";document.getElementById(\"addDisciplinaModal\").style.display=\"block\"' "+
         "			src='assets/img/add.svg'/>"+
         " 	</div> "+    		
         "</div> "+   			
         " </div> "+ 
         " <!-- fim item semestre -->";
-        this.num_semestre = this.num_semestre+1;
         return semestre;
     }
 
@@ -81,6 +89,7 @@ export class MyService {
     moveShowDisciplina(id_disciplina, id_semestre){
         $("#dis_id_"+id_disciplina).appendTo("#semestre_num_"+id_semestre);
         $("#dis_id_"+id_disciplina).css({"opacity":"1"}); 
+        this.disciplinas = this.disciplinas+1;
     }
   
     moveHideDisciplina(id_disciplina){
@@ -88,7 +97,6 @@ export class MyService {
         setTimeout(function() {
             $("#dis_id_"+id_disciplina).appendTo(".all_disc");
         }, 900);
-        this.disciplinas = this.disciplinas+1;
         // this.carga_horaria_obr = this.carga_horaria_obr + 
     }
 
